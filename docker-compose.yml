@@ -1,0 +1,32 @@
+services:
+  mysql:
+    image: mysql:8.0.32
+    container_name: mysql-sql-bsn
+    environment:
+      MYSQL_DATABASE: book_social_network
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootroot
+      MYSQL_DB: /var/lib/mysql/data
+    volumes:
+      - mysql:/data/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - boot-social-network
+    restart: unless-stopped
+
+  mail-dev:
+    image: maildev/maildev
+    container_name: mail-dev-bsn
+    restart: unless-stopped
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
+networks:
+  boot-social-network:
+    driver: bridge
+
+volumes:
+  mysql:
+    driver: local
