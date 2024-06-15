@@ -39,6 +39,9 @@ application:
 
   mail:
     frontend:
-      activation-url: http://${angular-host:localhost}:4200/activate-account
+      activation-url: https://${angular-host:localhost}:4200/activate-account
+  file:
+    upload:
+      cover-images-output-path: ./uploads
 server:
   port: 9000

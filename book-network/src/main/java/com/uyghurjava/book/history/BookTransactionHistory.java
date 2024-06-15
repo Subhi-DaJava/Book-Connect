@@ -20,8 +20,8 @@ import lombok.experimental.SuperBuilder;
 @Entity
 public class BookTransactionHistory extends ParentEntity {
 
-    private boolean isReturned;
-    private boolean isReturnApproved;
+    private boolean returned;
+    private boolean returnApproved;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
