@@ -1,6 +1,7 @@
 package com.uyghurjava.book;
 
 import com.uyghurjava.book.user.User;
+import jakarta.annotation.Nonnull;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public class CustomAuditAware implements AuditorAware<Integer> {
     @Override
+    @Nonnull
     public Optional<Integer> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

@@ -48,13 +48,13 @@ public class Book extends ParentEntity {
             return 0;
         }
 
-        var average = feedbacks
+        var average = this.feedbacks
                 .stream()
                 .mapToDouble(Feedback::getNote)
                 .average()
                 .orElse(0.0);
 
-        // round to 0 decimal places, 3.4 = 3 and 3.5 = 4
+        // 3.45 -> 3.5, 3.44 -> 3.4, 3.46 -> 3.5
         return Math.round(average * 10.0) / 10.0;
     }
 }

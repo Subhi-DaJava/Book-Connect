@@ -20,7 +20,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -42,7 +41,7 @@ public class IFeedbackService implements FeedbackService {
         if(userAuthenticated.getId().equals(book.getOwner().getId()))
             throw new OperationNotPermittedException("Feedback is not allowed for your own book");
 
-        // Save feedback to database
+        // Save feedback to a database
         Feedback feedBack = feedbackMapper.toFeedBack(feedBackRequest);
 
         Feedback savedFeedback = feedBackRepository.save(feedBack);
