@@ -44,6 +44,6 @@ export class LoginComponent {
 
   }
   signUp() {
-    this.router.navigate(['/signup']).then(r => {});
+    this.router.navigate(['/register']).then(r => {});
   }
 }
