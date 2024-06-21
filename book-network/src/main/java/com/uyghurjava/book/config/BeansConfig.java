@@ -12,6 +12,14 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.springframework.http.HttpHeaders.*;
 
 @Configuration
 @RequiredArgsConstructor
@@ -42,6 +50,38 @@ public class BeansConfig {
     @Bean
     public AuditorAware<Integer> customAuditAware() {
         return new CustomAuditAware();
+    }
+
+    /**
+     *  CORS Configuration for the application to allow cross-origin requests, this is required for the frontend to communicate with the backend
+     * @return CorsFilter
+     */
+    @Bean
+    public CorsFilter corsFilter() {
+        // don't import from reactive package
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        config.setAllowedHeaders(Arrays.asList(
+                ORIGIN,
+                CONTENT_TYPE,
+                ACCEPT,
+                AUTHORIZATION
+        ));
+
+
+        config.setAllowedMethods(Arrays.asList(
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "PATCH"
+        ));
+
+        source.registerCorsConfiguration("/**", config); // for all paths
+        return new CorsFilter(source);
     }
 }
 
