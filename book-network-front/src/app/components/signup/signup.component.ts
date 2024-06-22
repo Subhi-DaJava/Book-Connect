@@ -30,6 +30,12 @@ export class SignupComponent {
 
     }).subscribe({
       next: () => {
+        this.registerRequest = {
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: ''
+        };
         this.router.navigate(['activate-account']).then();
       },
       error: (error) => {

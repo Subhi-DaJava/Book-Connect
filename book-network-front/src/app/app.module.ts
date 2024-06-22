@@ -8,7 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import {FormsModule} from "@angular/forms";
 import { SignupComponent } from './components/signup/signup.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
-import {CodeInputModule} from "angular-code-input";
+import { CodeInputModule } from "angular-code-input";
 
 @NgModule({
   declarations: [

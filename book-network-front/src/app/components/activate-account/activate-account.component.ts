@@ -10,7 +10,7 @@ import {AuthenticationService} from "../../services/services/authentication.serv
 export class ActivateAccountComponent {
 
   errorMessage: string = '';
-
+  message: string = '';
   isValid: boolean = true;
   submitted: boolean = false;
 
@@ -19,7 +19,29 @@ export class ActivateAccountComponent {
     private authService: AuthenticationService
   ) { }
 
-  onCompleted(token: any) {
+  onCompleted(token: string) {
+    this.confirmNewAccount(token);
+  }
 
+  navigateToLogin() {
+    this.router.navigate(['login']).then();
+  }
+
+  private confirmNewAccount(token: string) {
+    // param is token and value is token, so we can use token only
+    this.authService.activateAccount({
+      token
+    }).subscribe({
+      next: () => {
+        this.message = 'Your account is now activated. You can now sign in!';
+        this.submitted = true;
+        this.isValid = true;
+      },
+      error: () => {
+        this.errorMessage = 'Invalid token or Token is expired. Please try again.';
+        this.submitted = true;
+        this.isValid = false;
+      }
+    });
   }
 }
