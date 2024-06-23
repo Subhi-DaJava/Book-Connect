@@ -30,7 +30,7 @@ export class LoginComponent {
       next: (response: AuthenticationResponse) => {
 
         this.tokenService.token = response.token as string; // Save the token in the local storage, cast it to string
-        this.router.navigate(['books']).then(r => {});
+        this.router.navigate(['books']).then();
       },
       error: (error) => {
         console.log(error);

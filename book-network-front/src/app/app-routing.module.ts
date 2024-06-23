@@ -7,7 +7,9 @@ import {ActivateAccountComponent} from "./components/activate-account/activate-a
 const routes: Routes = [
   { "path": "login", "component": LoginComponent },
   { "path": "register", "component": SignupComponent },
-  { "path": "activate-account", "component": ActivateAccountComponent }
+  { "path": "activate-account", "component": ActivateAccountComponent },
+  { "path": 'books', loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule) // Lazy loading, load the BookModule only when the user logs in
+  }
 ];
 
 @NgModule({
