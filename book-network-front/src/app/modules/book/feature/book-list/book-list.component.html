@@ -1,0 +1,6 @@
+<h2>Books List</h2>
+<hr>
+<!-- This div displays the list of books, if there are no books, it displays a message -->
+<div class="d-flex justify-content-start gap-2 flex-wrap">
+  <app-book-details [book]="book" *ngFor="let book of booksResponse.content">{{book.title}}</app-book-details>
+</div>

@@ -7,12 +7,12 @@ export class TokenService {
 
   // setter method
   set token(token: string) {
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
   }
 
   // getter method
   get token() {
-    return localStorage.getItem('token') as string;
+    return sessionStorage.getItem('token') as string;
   }
 
 }
