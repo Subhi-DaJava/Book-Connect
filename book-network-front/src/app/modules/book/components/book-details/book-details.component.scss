@@ -9,8 +9,9 @@ i {
   cursor: pointer; // cliquable
 }
 
+// Remain the same size
 div {
-
+  // each card class will have a max height of 30rem
   &.card {
     max-height: 30rem;
     min-height: 30rem;

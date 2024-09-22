@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BookResponse} from "../../../../services/models/book-response";
 import {NgIf} from "@angular/common";
+import {RatingComponent} from "../rating/rating.component";
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    RatingComponent
   ],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.scss'
