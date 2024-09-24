@@ -38,6 +38,11 @@ export class BookDetailsComponent {
     return this._manageBook;
   }
 
+  @Input()
+  set manageBook(value: boolean) {
+    this._manageBook = value;
+  }
+
   @Output() private details: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() private share: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
   @Output() private archive: EventEmitter<BookResponse> = new EventEmitter<BookResponse>();
