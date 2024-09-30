@@ -4,6 +4,7 @@ import { MainComponent } from './feature/main/main.component';
 import {BookListComponent} from "./feature/book-list/book-list.component";
 import {MyBooksComponent} from "./feature/my-books/my-books.component";
 import {ManageBookComponent} from "./feature/manage-book/manage-book.component";
+import {BorrowedBookListComponent} from "./feature/borrowed-book-list/borrowed-book-list.component";
 
 const routes: Routes = [
   { path: '', title: 'Main-Page', component: MainComponent,
@@ -13,6 +14,8 @@ const routes: Routes = [
       },
       {
         path: 'my-books', title: 'My-Books', component: MyBooksComponent
+      },{
+        path: 'my-borrowed-books', title: 'My-Borrowed-Books', component: BorrowedBookListComponent
       },
       {
         path: 'manage', title: 'Manage-Book', component: ManageBookComponent
