@@ -51,7 +51,7 @@
         <button (click)="returnBook(false)" type="submit" class="btn btn-outline-success">
           <i class="fas fa-paper-plane">&nbsp;Just Return</i>
         </button>
-        <button (click)="selectedBook = undefined" class="btn btn-link text-danger">
+        <button (click)="selectedBook = undefined;feedbackRequest.rating = 0" class="btn btn-link text-danger">
           <i class="fas fa-times">&nbsp;Cancel</i>
         </button>
       </div>
