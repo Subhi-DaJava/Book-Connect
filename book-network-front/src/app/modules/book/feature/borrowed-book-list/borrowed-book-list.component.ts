@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {BookService} from "../../../../services/services";
+import {BookService, FeedBackService} from "../../../../services/services";
 import {PageResponseBorrowedBooksResponse} from "../../../../services/models/page-response-borrowed-books-response";
 import {BorrowedBooksResponse} from "../../../../services/models/borrowed-books-response";
 import {NgForOf, NgIf} from "@angular/common";
@@ -27,6 +27,7 @@ export class BorrowedBookListComponent implements OnInit {
   borrowedBooks: PageResponseBorrowedBooksResponse = {};
 
   bookService = inject(BookService);
+  feedbackService = inject(FeedBackService);
 
   returnedBorrowedBook(book: BorrowedBooksResponse) {
     this.selectedBook = book;
@@ -77,6 +78,28 @@ export class BorrowedBookListComponent implements OnInit {
   }
 
   returnBook(feedback: boolean) {
+    this.bookService.returnBook({
+      'bookId': this.selectedBook?.id as number
+    }).subscribe({
+      next:() => {
+        if(feedback) {
+          this.giveFeedback();
+        }
+        this.selectedBook = undefined;
+        this.findAllBorrowedBooks();
+      }
+    });
+  }
+
+  private giveFeedback() {
+    this.feedbackRequest.bookId = this.selectedBook?.id as number;
+    this.feedbackService.createFeedBack({
+      body: this.feedbackRequest
+    }).subscribe({
+      next: () => {
+        this.feedbackRequest = { bookId: 0, feedback: '', rating: 0 };
+      }
+    });
   }
 }
 
