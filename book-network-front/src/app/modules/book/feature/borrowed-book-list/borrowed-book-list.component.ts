@@ -3,13 +3,18 @@ import {BookService} from "../../../../services/services";
 import {PageResponseBorrowedBooksResponse} from "../../../../services/models/page-response-borrowed-books-response";
 import {BorrowedBooksResponse} from "../../../../services/models/borrowed-books-response";
 import {NgForOf, NgIf} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {FeedbackRequest} from "../../../../services/models/feedback-request";
+import {RatingComponent} from "../../components/rating/rating.component";
 
 @Component({
   selector: 'app-borrowed-book-list',
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    FormsModule,
+    RatingComponent
   ],
   templateUrl: './borrowed-book-list.component.html',
   styleUrl: './borrowed-book-list.component.scss'
@@ -17,20 +22,21 @@ import {NgForOf, NgIf} from "@angular/common";
 export class BorrowedBookListComponent implements OnInit {
   page = 0;
   size = 5;
+  selectedBook: BorrowedBooksResponse | undefined = undefined;
+  feedbackRequest: FeedbackRequest = { rating: 0, feedback: '', bookId: 0 };
+  borrowedBooks: PageResponseBorrowedBooksResponse = {};
 
   bookService = inject(BookService);
 
-  borrowedBooks: PageResponseBorrowedBooksResponse = {}
-
   returnedBorrowedBook(book: BorrowedBooksResponse) {
-
+    this.selectedBook = book;
   }
 
   ngOnInit(): void {
     this.findAllBorrowedBooks();
   }
 
-private findAllBorrowedBooks() {
+  private findAllBorrowedBooks() {
     this.bookService.retrieveAllBorrowedBooksByUser({
       page: this.page,
       size: this.size
@@ -68,6 +74,9 @@ private findAllBorrowedBooks() {
 
   get isLastPage(): boolean {
     return  this.page === this.borrowedBooks.totalPages as number - 1;
+  }
+
+  returnBook(feedback: boolean) {
   }
 }
 
