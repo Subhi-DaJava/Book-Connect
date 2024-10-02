@@ -1,3 +1,13 @@
+<h2>My Returned books</h2>
+<hr>
+<div
+  *ngIf="message"
+  class="alert"
+  [class.alert-success] = "level === 'Success'"
+  [class.alert-danger] = "level === 'Error'"
+>
+  {{ message }}
+</div>
 <div >
   <table class="table">
     <thead>

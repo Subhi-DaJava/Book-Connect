@@ -11,16 +11,19 @@ import {BookService} from "../../../../services/services/book.service";
     NgForOf,
     NgIf
   ],
-  templateUrl: './return-books.component.html',
-  styleUrl: './return-books.component.scss'
+  templateUrl: './returned-books.component.html',
+  styleUrl: './returned-books.component.scss'
 })
-export class ReturnBooksComponent implements OnInit {
+export class ReturnedBooksComponent implements OnInit {
   page = 0;
   size = 5;
 
   returnedBooks: PageResponseBorrowedBooksResponse = {};
 
   bookService = inject(BookService);
+
+  message: string = '';
+  level: string = 'Success';
 
   ngOnInit(): void {
     this.findAllReturnedBooks();
@@ -67,6 +70,20 @@ export class ReturnBooksComponent implements OnInit {
   }
 
   approveBookReturn(book: BorrowedBooksResponse) {
+    if (!book.returned) {
+      this.level = 'Error';
+      this.message = 'The Book is not returned yet!';
+      return;
+    }
+    this.bookService.approveReturnedBook({
+      'bookId': book.id as number
+    }).subscribe({
+      next: () => {
+        this.level = 'Success';
+        this.message = 'Book returned has been successfully approved !';
+        this.findAllReturnedBooks();
+      }
+    });
 
   }
 }

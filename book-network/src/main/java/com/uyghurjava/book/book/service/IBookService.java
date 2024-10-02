@@ -109,7 +109,8 @@ public class IBookService implements BookService {
                 .map(bookMapper::toBookResponse)
                 .toList();
 
-        log.info("Retrieving all books by owner, from method retrieveAllBooksByOwner of BookService");
+        log.info("Retrieving all books by owner with id: {}, from method retrieveAllBooksByOwner of BookService.", connectedUserAndBookOwner.getId());
+
         return new PageResponse<>(
                 bookResponses,
                 books.getNumber(),
@@ -134,7 +135,7 @@ public class IBookService implements BookService {
                 .map(bookMapper::toBorrowedBooksResponse)
                 .toList();
 
-        log.info("Retrieving all borrowed books by user, from method retrieveAllBorrowedBooksByUser of BookService");
+        log.info("Retrieving all borrowed books by user with id: {}, from method retrieveAllBorrowedBooksByUser of BookService", connectedUser.getId());
 
         return new PageResponse<>(
                 bookResponses,
@@ -160,7 +161,8 @@ public class IBookService implements BookService {
                 .map(bookMapper::toBorrowedBooksResponse)
                 .toList();
 
-        log.info("Retrieving all returned books by user, from method retrieveAllReturnedBooksByUser of BookService");
+        log.info("Retrieving all returned books by user with id: {}, from method retrieveAllReturnedBooksByUser of BookService", connectedUser.getId());
+
         return new PageResponse<>(
                 bookResponses,
                 allReturnedBooks.getNumber(),

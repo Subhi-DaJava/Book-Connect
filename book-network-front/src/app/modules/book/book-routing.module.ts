@@ -5,7 +5,7 @@ import {BookListComponent} from "./feature/book-list/book-list.component";
 import {MyBooksComponent} from "./feature/my-books/my-books.component";
 import {ManageBookComponent} from "./feature/manage-book/manage-book.component";
 import {BorrowedBookListComponent} from "./feature/borrowed-book-list/borrowed-book-list.component";
-import {ReturnBooksComponent} from "./feature/return-books/return-books.component";
+import {ReturnedBooksComponent} from "./feature/returned-books/returned-books.component";
 
 const routes: Routes = [
   { path: '', title: 'Main-Page', component: MainComponent,
@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'my-borrowed-books', title: 'My-Borrowed-Books', component: BorrowedBookListComponent
       },
       {
-        path: 'my-returned-books', title: 'My-Returned-Books', component: ReturnBooksComponent
+        path: 'my-returned-books', title: 'My-Returned-Books', component: ReturnedBooksComponent
       },
       {
         path: 'manage', title: 'Manage-Book', component: ManageBookComponent
