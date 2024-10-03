@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
 import {SignupComponent} from "./components/signup/signup.component";
 import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
+import {authGuard} from "./services/guard/auth.guard";
 
 const routes: Routes = [
   { "path": "login", "component": LoginComponent },
   { "path": "register", "component": SignupComponent },
   { "path": "activate-account", "component": ActivateAccountComponent },
-  { "path": 'books', loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule) // Lazy loading, load the BookModule only when the user logs in
+
+  { "path": 'books', loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule), // Lazy loading, load the BookModule only when the user logs in
+    canActivate: [authGuard]
   }
 ];
 
