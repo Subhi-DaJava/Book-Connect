@@ -2,9 +2,8 @@ spring:
   datasource:
     url: jdbc:mysql://${mysql_host:localhost}:3306/book_social_network?serverTimezone=UTC&&createDatabaseIfNotExist=true
     username: ${username}
-    password: ${user_pasword}
+    password: ${user_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,35 +12,30 @@ spring:
       hibernate:
         format_sql: true
       database: mysql
-      database-platform: org.hibernate.dialect.MySQL8Dialect
-
   mail:
-    host: localhost
-    port: 1025
-    username: subhi_dajava
-    password: password
+    host: ${host-email}
+    port: ${port-email}
+    username: ${username-email}
+    password: ${password-email}
     properties:
       mail:
         smtp:
-          trust: "*"
-        auth: true
-        starttls:
-          enable: true
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
-
+          auth: true
+          starttls:
+            enable: true
 application:
   security:
     jwt:
-      secret-key: ${sbn_api_secret_key}
+      secret-key: ${jwt-secret-key}
       expiration: 86400000
-
   mail:
     frontend:
-      activation-url: https://${angular-host:localhost}:4200/activate-account
+      activation-url: http://localhost:4200/activate-account
   file:
     upload:
       cover-images-output-path: ./uploads
 server:
   port: 9000
+
+host-email:
+  email: ${user-email}

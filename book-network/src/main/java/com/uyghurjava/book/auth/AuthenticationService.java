@@ -21,7 +21,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -84,8 +83,8 @@ public class AuthenticationService {
     }
 
     private String generateAndSaveActivationToken(User user) {
-        String generatedToken = generateActivationCode(8);
-
+        int tokenLength = 8;
+        String generatedToken = generateActivationCode(tokenLength);
         var token = Token.builder()
                 .token(generatedToken)
                 .createdAt(LocalDateTime.now())

@@ -4,29 +4,42 @@ services:
     container_name: mysql-sql-bsn
     environment:
       MYSQL_DATABASE: book_social_network
-      MYSQL_USER: root
-      MYSQL_PASSWORD: rootroot
-      MYSQL_DB: /var/lib/mysql/data
+      MYSQL_PASSWORD: ${user_password}
+      MYSQL_ROOT_PASSWORD: ${user_password}
+
     volumes:
-      - mysql:/data/mysql
+      - bsn_api_book_db:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3308:3306"
     networks:
-      - boot-social-network
+      - book-social-network
     restart: unless-stopped
 
-  mail-dev:
-    image: maildev/maildev
-    container_name: mail-dev-bsn
-    restart: unless-stopped
+  bsn-api:
+    container_name: bsn-api-1
+    image: bsn/bsn-api-1:1.0.1
     ports:
-      - "1080:1080"
-      - "1025:1025"
+      - "9000:9000"
+    networks:
+      - book-social-network
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  bsn-ui:
+    container_name: bsn-ui-1
+    image: bsn/bsn-ui-1:1.0.1
+    ports:
+      - "9002:80"
+    networks:
+      - book-social-network
+    depends_on:
+      - bsn-api
+    restart: unless-stopped
 
 networks:
-  boot-social-network:
+  book-social-network:
     driver: bridge
 
 volumes:
-  mysql:
-    driver: local
+  bsn_api_book_db:

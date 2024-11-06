@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.uyghurjava</groupId>
 	<artifactId>book-network</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>book-network-api</name>
 	<description>Demo project for Spring Boot Social Network</description>
 	<properties>
